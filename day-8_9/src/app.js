@@ -1,8 +1,13 @@
 //write the all server related code
 const noteModel = require("./config/models/notes.models")
 const express = require("express");
+const cors = require("cors")
+
 
 const app = express();
+
+
+app.use(cors())
 // using the middileware
 app.use(express.json())
 
