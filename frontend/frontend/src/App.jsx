@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { receiveData } from "../src/api/api";
-import AddNote from "./pages/AddNote";
+import { receiveData, updateDes } from "../src/api/api";
 function App() {
+  const [des, setdes] = useState("");
   const [notes, setnotes] = useState([]);
 
   const getData = async () => {
@@ -13,25 +13,41 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  async function handleUpdateNote(noteId) {
+    await updateDes(noteId, {
+      description: des,
+    });
+    getData();
+  }
+
   return (
     <>
+      <input
+        type="text"
+        value={des}
+        onChange={(e) => {
+          setdes(e.target.value);
+        }}
+      />
       {notes.map((note, id) => {
         return (
           <div className="card" key={id}>
-            <h1>{note._id}</h1>
             <h1>{note.title}</h1>
             <p>{note.description}</p>
+            <button
+              onClick={() => {
+                handleUpdateNote(note._id);
+              }}
+            >
+              update description
+            </button>
           </div>
         );
       })}
-
-
-      <AddNote/>
+      {/* <AddNote getData={getData} /> */}
     </>
   );
 }
-
-
-
 
 export default App;
