@@ -36,7 +36,7 @@ app.post("/api/notes", async (req, res) => {
   });
 
   res.status(201).json({
-    message: "notes create successfully",
+    message: "notes create successfully done",
     note,
   });
 });
