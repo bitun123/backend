@@ -15,8 +15,8 @@ export const createNotes = async (data)=>{
 
 
 export const getNotes = async()=>{
-    const res = await  API.get("/api/notes");
-    return res.data
+    const res = await API.get("/api/notes");
+    return res.data.note
 }
 
 

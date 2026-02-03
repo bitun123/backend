@@ -4,8 +4,24 @@ const express = require("express");
 //require noteModel
 const noteModel = require("./config/module/note.module");
 
+//require cors
+const cors = require("cors")
+
+
+//require path
+const path = require("path")
+
+
+//
+
+
 //call the express and store in app variable
 const app = express();
+
+
+// use cors middleware
+app.use(cors())
+app.use(express.static("./public"))
 
 // use middleware
 app.use(express.json());
@@ -56,7 +72,10 @@ app.patch("/api/notes/:id",async (req,res)=>{
    note
     })
 })
-
+//create middleware
+app.use("*name",(req,res)=>{
+    res.sendFile(path.join(__dirname,"..","/public/index.html"))
+})
 
 // export the app
 module.exports = app;
