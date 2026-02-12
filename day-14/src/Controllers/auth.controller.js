@@ -27,7 +27,6 @@ async function registerControllers(req, res) {
     email,
     password: hash,
     bio,
-    profileImage,
   });
 
   //   token generate using jwt secret
@@ -37,11 +36,12 @@ async function registerControllers(req, res) {
 
   //save the token from the cookie using the cookie-parser
   res.cookie("jwt-token", token);
+
   res.status(201).json({
-    userName,
-    email,
-    bio,
-    profileImage,
+    userName: user.userName,
+    email: user.email,
+    bio: user.bio,
+    profileImage: user.profileImage,
     token,
   });
 }
